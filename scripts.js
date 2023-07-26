@@ -23,21 +23,34 @@ createList();
 
 //Insert list items into DOM
 function createList() {
-  [...richestPeople].forEach(function (person, index) {
-    const listItem = document.createElement('li');
+  [...richestPeople]
+    .map(function (a) {
+      return {
+        value: a,
+        sort: Math.random()
+      };
+    })
+    .sort(function (a, b) {
+      return a.sort - b.sort;
+    })
+    .map(function (a) {
+      return a.value;
+    })
+    .forEach(function (person, index) {
+      const listItem = document.createElement('li');
 
-    listItem.setAttribute('data-index', index);
+      listItem.setAttribute('data-index', index);
 
-    listItem.innerHTML = `
+      listItem.innerHTML = `
     <span class="number">${index + 1}</span>
     <div class="draggable" draggable="true">
-    <p class="person-name">${person}</p>
-    <i class="fas fa-grip-lines"></i>
+      <p class="person-name">${person}</p>
+      <i class="fas fa-grip-lines"></i>
     </div>
     `;
 
-    listItems.push(listItem);
+      listItems.push(listItem);
 
-    draggableList.appendChild(listItem);
-  })
+      draggableList.appendChild(listItem);
+    })
 }
