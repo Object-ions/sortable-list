@@ -52,5 +52,43 @@ function createList() {
       listItems.push(listItem);
 
       draggableList.appendChild(listItem);
-    })
+    });
+
+  addEventListeners();
+};
+
+function dragStart() {
+  console.log('event: ', 'dragstart');
+}
+
+function dragEnter() {
+  console.log('event: ', 'dragenter');
+}
+
+function dragLeave() {
+  console.log('event: ', 'dragleave');
+}
+
+function dragOver() {
+  console.log('event: ', 'dragover');
+}
+
+function dragDrop() {
+  console.log('event: ', 'dragdrop');
+}
+
+function addEventListeners() {
+  const draggables = document.querySelectorAll('.draggable');
+  const dragListItems = document.querySelectorAll('.draggable-list li');
+
+  draggables.forEach(function (draggable) {
+    draggable.addEventListener('dragstart', dragStart);
+  });
+
+  dragListItems.forEach(function (item) {
+    item.addEventListener('dragover', dragOver);
+    item.addEventListener('drop', dragDrop);
+    item.addEventListener('dragenter', dragEnter);
+    item.addEventListener('dragleave', dragLeave);
+  });
 }
